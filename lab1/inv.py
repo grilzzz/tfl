@@ -71,45 +71,67 @@ def monomial_exponents(w: str):
     return (a, b + c)
 
 
-def _counts_abc(w: str):
-    """(|a|, |b|, |c|) для слова w."""
-    c = Counter(w)
-    return c.get('a', 0), c.get('b', 0), c.get('c', 0)
-
+def _rand_diag(dim=2, low=0.5, high=2.0, rng=None):
+    """
+    Сгенерировать случайную диагональную матрицу
+    """
+    if rng is None:
+        rng = np.random.default_rng()
+    d = rng.uniform(low, high, size=dim)
+    return np.diag(d)
 
 def matrix_invariant(
     w: str,
     A: np.ndarray | None = None,
     X: np.ndarray | None = None,
-    alpha: float = 2.0,
-    beta: float = 3.0,
-) -> np.ndarray:
+    *,
+    dim: int = 2,
+    rng_seed: int | None = None,
+    low: float = 0.5,
+    high: float = 2.0,
+    return_matrices: bool = False,
+) -> np.ndarray | tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
-    Возвращает матрицу-инвариант M(w) = A^{|w|_a} · X^{|w|_b + |w|_c}.
-    По умолчанию берём диагональные матрицы (можно любые коммутирующие):
-        A = diag(alpha, alpha^{-1}),
-        X = diag(beta,  beta^{-1})
-    Можно передать свои A, X.
+    Матричный инвариант, умножая матрицы В ПОРЯДКЕ букв слова:
+        M_a = A, M_b = M_c = X.
+
+    Перемножение этих патриц в порядке следования букв является инвариантом.
+    В итоговой проверке используются след и определитель матриц, потому что сами матрицы проверять на равенство мне лень. 
     """
-    a_cnt, b_cnt, c_cnt = _counts_abc(w)
-    if A is None or X is None:
-        A = np.diag([alpha, 1.0/alpha])
-        X = np.diag([beta,  1.0/beta])
+    
+    rng = np.random.default_rng(rng_seed) if (A is None or X is None) else None
+
+    if A is None:
+        A = _rand_diag(dim=dim, low=low, high=high, rng=rng)
+    if X is None:
+        X = _rand_diag(dim=dim, low=low, high=high, rng=rng)
+
     if A.shape != X.shape or A.shape[0] != A.shape[1]:
         raise ValueError("A и X должны быть квадратными и одинакового размера.")
+        
     if not np.allclose(A @ X, X @ A):
         raise ValueError("A и X обязаны коммутировать: A@X == X@A.")
-    M = np.linalg.matrix_power(A, a_cnt) @ np.linalg.matrix_power(X, (b_cnt + c_cnt))
-    return M
+    
+    n = A.shape[0]
+    M = np.eye(n)
+    for ch in w:
+        if ch == 'a':
+            M = M @ A
+        elif ch == 'b' or ch == 'c':
+            M = M @ X
+
+    return (M, A, X) if return_matrices else M
+
+
 
 def matrix_invariant_trace(w: str, **kwargs) -> float:
     """След матрицы-инварианта tr(M(w))."""
-    return float(np.trace(matrix_invariant(w, **kwargs)))
+    return round(float(np.trace(matrix_invariant(w, **kwargs))), 2)
 
 def matrix_invariant_det(w: str, **kwargs) -> float:
     """Определитель det(M(w))."""
     import numpy as _np
-    return float(_np.linalg.det(matrix_invariant(w, **kwargs)))
+    return round(float(_np.linalg.det(matrix_invariant(w, **kwargs))), 2)
 
 
 def parity_b_minus_c(w: str):
@@ -140,6 +162,9 @@ def block_parity_total(w: str) -> int:
     return odd_total
 
 
+A=_rand_diag()
+X=_rand_diag()
+
 def invariants(w: str):
     a, b, c = counts(w)
     inv = {
@@ -148,8 +173,8 @@ def invariants(w: str):
         "sum_bc": b + c,
         "parity_b_minus_c": parity_b_minus_c(w),
         "monomial_exponents": monomial_exponents(w), 
-        "matrix_invariant_trace": matrix_invariant_trace(w),
-        "matrix_invariant_det": matrix_invariant_det(w),
+        "matrix_invariant_trace": matrix_invariant_trace(w, A=A, X=X),
+        "matrix_invariant_det": matrix_invariant_det(w, A=A, X=X),
         "block_parity_total": block_parity_total(w),
     }
     return inv
