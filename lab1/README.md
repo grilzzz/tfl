@@ -70,10 +70,10 @@ $$
 \texttt{ab}^n\texttt{cc}\quad\text{vs}\quad \texttt{b a b}^{\,n+1}
 $$
 
-в нормальных формах исходной $ \mathcal T$. Поэтому K–B будет бесконечно добавлять правила
+в нормальных формах исходной TRS. Поэтому K–B будет бесконечно добавлять правила
 
 $$
-\boxed{\ \texttt{ab}^n\texttt{cc}\ \to\ \texttt{b a b}^{\,n+1}\qquad(n\ge1)\ } \tag{N\(_n\)}
+\texttt{ab}^n\texttt{cc}\ \to\ \texttt{b a b}^{\,n+1}\qquad(n\ge1)\ } \tag{N\(_n\)
 $$
 
 Вывод: процедура Кнута–Бендикса не завершится конечным набором правил.
