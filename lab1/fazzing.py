@@ -112,7 +112,7 @@ def reachable_unidirectional(src: str, dst: str, rules, max_depth=40, max_nodes=
 
     return False, []
 
-# не используется
+# не используется (сначала делал так чтобы можно было ходить в 2 стороны)
 def reachable_bidirectional(src, dst, rules, max_depth=40, max_nodes=500000):
     if src == dst:
         return True, [src]
