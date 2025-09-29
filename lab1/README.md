@@ -4,7 +4,7 @@
 
 Введём функцию от слова $w$:
 
-$L(w) = \\{(i,j)\mid i<j,\ w[i]=\texttt{a},\ w[j]=\texttt{c}\\}$,
+$L(w) = \left|\\{(i,j)\mid i<j,\ w[i]=\texttt{a},\ w[j]=\texttt{c}\\}\right|$,
 
 то есть количество пар «a стоит левее c».
 
