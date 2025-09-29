@@ -76,28 +76,10 @@ $$
 
 ## 5) Инварианты
 
-1. **Длина слова.**
-   [
-   \mathrm{len}(w)=|w|.
-   ]
-
-2. **Число (\mathtt a).**
-   [
-   |w|_{\mathtt a}=#{,i\mid w[i]=\mathtt a,}.
-   ]
-
-3. **Сумма (\mathtt b+\mathtt c).**
-   [
-   |w|*{\mathtt b}+|w|*{\mathtt c}.
-   ]
-   Следует из (1) и (2), так как ( |w|=|w|*{\mathtt a}+|w|*{\mathtt b}+|w|_{\mathtt c}).
-
-4. **Пара показателей (мономиальный инвариант).**
-   [
-   \big(|w|*{\mathtt a},; |w|*{\mathtt b}+|w|*{\mathtt c}\big)
-   \quad\text{(эквивалентно мономиалу }X^{|w|*{\mathtt a}}Y^{|w|*{\mathtt b}+|w|*{\mathtt c}}\text{).}
-   ]
-
+1. Длина слова.
+2. Число букв a.
+3. **Сумма букв b и c.
+4. (второй инвариант, третий инвариант).
 5. **Чётность разности (|\mathtt b|-|\mathtt c|).**
    [
    \big(|w|*{\mathtt b}-|w|*{\mathtt c}\big)\bmod 2.
