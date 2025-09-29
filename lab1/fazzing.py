@@ -216,5 +216,5 @@ for status, w0, w1, chain, path in examples:
     # print(status)
     # print(f"w:  {w0}")
     # print(f"w′: {w1}")
-    # print(f"Random chain by T (w =>* w′): { ' → '.join(chain) }")
+    # print(f"Random chain by T (w =>* w′): { ' => '.join(chain) }")
     pass
