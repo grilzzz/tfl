@@ -73,7 +73,7 @@ $$
 в нормальных формах исходной TRS. Поэтому K–B будет бесконечно добавлять правила
 
 $$
-\texttt{ab}^n\texttt{cc}\ \to\ \texttt{b a b}^{\,n+1}\qquad(n\ge1)\tag{\(N_n\)}
+\texttt{ab}^n\texttt{cc}\ \to\ \texttt{b a b}^{\,n+1}\qquad(n\ge1)\tag{$N_n$}
 $$
 
 
