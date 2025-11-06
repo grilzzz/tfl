@@ -1,3 +1,4 @@
+## ДКА
 Получившийся ДКА лежит в файле dka.dot. Вот его картинка:
 <img width="1280" height="1105" alt="image" src="https://github.com/user-attachments/assets/29116058-8107-4ca5-b9a8-2ab756a51824" />
 
