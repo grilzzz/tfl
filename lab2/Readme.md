@@ -23,3 +23,6 @@
 | baccb → q14        |   0   |   0   | **1** |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |
 | baccab → q15       |   0   | **1** |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |
 
+## НКА
+Получившийся НКА лежит в файле dka.dot. Вот его картинка:
+<img width="1832" height="1102" alt="image" src="https://github.com/user-attachments/assets/bb1ad6a4-995b-4a20-a01c-7057bc834107" />
