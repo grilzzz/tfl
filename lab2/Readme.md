@@ -54,5 +54,5 @@
 
 
 ## Регулярка
-^c*(a+b+abc*)*(ba(b|a?cac|cc(bb|aba)))*$
+`^(a+b+ab|c)*(ba(b|a?cac|cc(bb|aba)))*$`
 
