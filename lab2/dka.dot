@@ -1,0 +1,69 @@
+digraph DFA {
+  rankdir=LR;
+  node [shape=circle];
+
+  // старт
+  start [shape=point, label=""];
+  start -> q1;
+
+  // принимающие
+  q0 [shape=doublecircle];
+  q1 [shape=doublecircle];
+
+  // остальные состояния
+  q2; q3; q4; q5; q6; q7; q8; q9; q10; q11; q12; q13; q14; q15;
+
+  // переходы
+  q0  -> q8  [label="b"];
+  q0  -> q10 [label="a,c"];
+
+  q1  -> q7  [label="a"];
+  q1  -> q8  [label="b"];
+  q1  -> q1  [label="c"];
+
+  q2  -> q11 [label="a"];
+  q2  -> q10 [label="b"];
+  q2  -> q6  [label="c"];
+
+  q3  -> q11 [label="a"];
+  q3  -> q10 [label="b,c"];
+
+  q4  -> q3  [label="c"];
+  q4  -> q10 [label="a,b"];
+
+  q5  -> q13 [label="a"];
+  q5  -> q5  [label="b"];
+  q5  -> q10 [label="c"];
+
+  q6  -> q9  [label="a"];
+  q6  -> q14 [label="b"];
+  q6  -> q10 [label="c"];
+
+  q7  -> q7  [label="a"];
+  q7  -> q5  [label="b"];
+  q7  -> q10 [label="c"];
+
+  q8  -> q12 [label="a"];
+  q8  -> q10 [label="b,c"];
+
+  q9  -> q15 [label="b"];
+  q9  -> q10 [label="a,c"];
+
+  q10 -> q10 [label="a,b,c"]; // ловушка
+
+  q11 -> q0  [label="c"];
+  q11 -> q10 [label="a,b"];
+
+  q12 -> q4  [label="a"];
+  q12 -> q0  [label="b"];
+  q12 -> q2  [label="c"];
+
+  q13 -> q1  [label="b"];
+  q13 -> q10 [label="a,c"];
+
+  q14 -> q0  [label="b"];
+  q14 -> q10 [label="a,c"];
+
+  q15 -> q0  [label="a"];
+  q15 -> q10 [label="b,c"];
+}
