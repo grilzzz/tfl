@@ -1,16 +1,59 @@
-digraph{
-	rankdir=LR
-	node [shape=circle]
-	point [shape=point]
-	1, 6[shape=doublecircle]
+digraph DFA {
+    rankdir=LR;
+    node [shape = doublecircle]; q0 q4 q7;
+    node [shape = circle];
 
-	point->S
-	S,2->1->2[label=a]
-	1 -> 3[label="b Z0/AA0Z0"]
-	3 -> 3[label="b x/AAx"]
-	3 -> 4[label="a A/e"]
-	4 -> 5 -> 4[label=a]
-	4 -> 3[label=e]
-	3 -> 6[label="a A0/e"]
-	6 -> 7 -> 6[label=a]
+    qi [shape=point];
+    qi -> q0;
+
+    q0 -> q1  [label="a"];
+    q0 -> q2  [label="b"];
+    q0 -> q0  [label="c"];
+
+    q1 -> q1  [label="a"];
+    q1 -> q3  [label="b"];
+    q1 -> q14 [label="c"];
+
+    q2 -> q4  [label="a"];
+    q2 -> q14 [label="b, c"];
+
+    q3 -> q5  [label="a"];
+    q3 -> q3  [label="b"];
+    q3 -> q14 [label="c"];
+
+    q4 -> q6  [label="a"];
+    q4 -> q7  [label="b"];
+    q4 -> q8  [label="c"];
+
+    q5 -> q14 [label="a, c"];
+    q5 -> q0  [label="b"];
+
+    q6 -> q14 [label="a, b"];
+    q6 -> q9  [label="c"];
+
+    q7 -> q4  [label="a"];
+    q7 -> q7  [label="b"];
+    q7 -> q8  [label="c"];
+
+    q8 -> q10 [label="a"];
+    q8 -> q14 [label="b"];
+    q8 -> q11 [label="c"];
+
+    q9 -> q10 [label="a"];
+    q9 -> q14 [label="b, c"];
+
+    q10 -> q14 [label="a, b"];
+    q10 -> q4  [label="c"];
+
+    q11 -> q12 [label="a"];
+    q11 -> q13 [label="b"];
+    q11 -> q14 [label="c"];
+
+    q12 -> q14 [label="a, c"];
+    q12 -> q2  [label="b"];
+
+    q13 -> q14 [label="a, c"];
+    q13 -> q4  [label="b"];
+
+    q14 -> q14 [label="a, b, c"];
 }
