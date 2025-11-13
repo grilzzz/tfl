@@ -1,59 +1,101 @@
-digraph DFA {
+digraph PKA {
     rankdir=LR;
-    node [shape = doublecircle]; q0 q4 q7;
-    node [shape = circle];
 
-    qi [shape=point];
-    qi -> q0;
+    // Global start and conjunctive state
+    start [shape=point];
+    AND [shape=diamond, label="AND"];
+    start -> AND;
 
-    q0 -> q1  [label="a"];
-    q0 -> q2  [label="b"];
-    q0 -> q0  [label="c"];
+    // Epsilon-split into two DFAs
+    AND -> r0 [label="ε"];
+    AND -> t0 [label="ε"];
 
-    q1 -> q1  [label="a"];
-    q1 -> q3  [label="b"];
-    q1 -> q14 [label="c"];
+    // First component: minimal DFA for (aa*bb*ab | c*)*(ba(b | (c | ac)ac | cc(bb | aba))*)*
+    subgraph cluster_regex {
+        
+        node [shape=doublecircle]; r0 r1 r2;
+        node [shape=circle];
 
-    q2 -> q4  [label="a"];
-    q2 -> q14 [label="b, c"];
+        r0 -> r11 [label="b"];
+        r0 -> r0  [label="c"];
+        r0 -> r7  [label="a"];
 
-    q3 -> q5  [label="a"];
-    q3 -> q3  [label="b"];
-    q3 -> q14 [label="c"];
+        r1 -> r2  [label="b"];
+        r1 -> r5  [label="c"];
+        r1 -> r9  [label="a"];
 
-    q4 -> q6  [label="a"];
-    q4 -> q7  [label="b"];
-    q4 -> q8  [label="c"];
+        r2 -> r2  [label="b"];
+        r2 -> r5  [label="c"];
+        r2 -> r1  [label="a"];
 
-    q5 -> q14 [label="a, c"];
-    q5 -> q0  [label="b"];
+        r3 -> r11 [label="b"];
+        r3 -> r10 [label="c"];
+        r3 -> r10 [label="a"];
 
-    q6 -> q14 [label="a, b"];
-    q6 -> q9  [label="c"];
+        r4 -> r13 [label="b"];
+        r4 -> r10 [label="c"];
+        r4 -> r3  [label="a"];
 
-    q7 -> q4  [label="a"];
-    q7 -> q7  [label="b"];
-    q7 -> q8  [label="c"];
+        r5 -> r10 [label="b"];
+        r5 -> r4  [label="c"];
+        r5 -> r12 [label="a"];
 
-    q8 -> q10 [label="a"];
-    q8 -> q14 [label="b"];
-    q8 -> q11 [label="c"];
+        r6 -> r6  [label="b"];
+        r6 -> r10 [label="c"];
+        r6 -> r14 [label="a"];
 
-    q9 -> q10 [label="a"];
-    q9 -> q14 [label="b, c"];
+        r7 -> r6  [label="b"];
+        r7 -> r10 [label="c"];
+        r7 -> r7  [label="a"];
 
-    q10 -> q14 [label="a, b"];
-    q10 -> q4  [label="c"];
+        r8 -> r10 [label="b"];
+        r8 -> r10 [label="c"];
+        r8 -> r12 [label="a"];
 
-    q11 -> q12 [label="a"];
-    q11 -> q13 [label="b"];
-    q11 -> q14 [label="c"];
+        r9 -> r10 [label="b"];
+        r9 -> r8  [label="c"];
+        r9 -> r10 [label="a"];
 
-    q12 -> q14 [label="a, c"];
-    q12 -> q2  [label="b"];
+        // r10 is the dead/sink state
+        r10 -> r10 [label="b"];
+        r10 -> r10 [label="c"];
+        r10 -> r10 [label="a"];
 
-    q13 -> q14 [label="a, c"];
-    q13 -> q4  [label="b"];
+        r11 -> r10 [label="b"];
+        r11 -> r10 [label="c"];
+        r11 -> r1  [label="a"];
 
-    q14 -> q14 [label="a, b, c"];
+        r12 -> r10 [label="b"];
+        r12 -> r1  [label="c"];
+        r12 -> r10 [label="a"];
+
+        r13 -> r1  [label="b"];
+        r13 -> r10 [label="c"];
+        r13 -> r10 [label="a"];
+
+        r14 -> r0  [label="b"];
+        r14 -> r10 [label="c"];
+        r14 -> r10 [label="a"];
+    }
+
+    subgraph cluster_filter {
+
+        node [shape=doublecircle]; t0 t2;
+        node [shape=circle];
+
+        // t0: start, accepting, so ε (empty word) allowed; only "b" alone is rejected.
+        t0 -> t1 [label="b"];
+        t0 -> t2 [label="a"];
+        t0 -> t2 [label="c"];
+
+        // t1: we have read exactly "b" so far (non-accepting)
+        t1 -> t2 [label="a"];
+        t1 -> t2 [label="b"];
+        t1 -> t2 [label="c"];
+
+        // t2: any other word (length ≥1 and != "b"), accepting sink
+        t2 -> t2 [label="a"];
+        t2 -> t2 [label="b"];
+        t2 -> t2 [label="c"];
+    }
 }
