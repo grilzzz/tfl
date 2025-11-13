@@ -2,79 +2,58 @@ digraph NFA {
     rankdir=LR;
     node [shape=circle];
 
-    // Стартовая точка
     start [shape=point];
     start -> f0;
 
-    // ===== Часть F = (aa*bb*ab | c*)* =====
-    // Реализуем как c*(A c*)*, где A = aa*bb*ab
 
     f0 [label="f0"];
     f1 [label="f1"];
     f2 [label="f2"];
     f3 [label="f3"];
 
-    // c* в начале и между блоками A
     f0 -> f0 [label="c"];
 
-    // A = a a* b b* a b
-    f0 -> f1 [label="a"];      // первый 'a'
-    f1 -> f1 [label="a"];      // a*
-    f1 -> f2 [label="b"];      // первый 'b'
-    f2 -> f2 [label="b"];      // b*
-    f2 -> f3 [label="a"];      // 'a' перед концом
-    f3 -> f0 [label="b"];      // завершающий 'b' блока A, возврат в f0
+    f0 -> f1 [label="a"];    
+    f1 -> f1 [label="a"];   
+    f1 -> f2 [label="b"];   
+    f2 -> f2 [label="b"];   
+    f2 -> f3 [label="a"];     
+    f3 -> f0 [label="b"];     
 
-    // ===== Переход от F к G по конкатенации F G =====
     f0 -> g0 [label="ε"];
 
-    // ===== Часть G = (ba(b | (c | ac)ac | cc(bb | aba))*)* =====
-
-    // g0 — начало второй части и глобальное завершающее состояние
     g0 [shape=doublecircle, label="g0"];
     g1 [label="g1"];
 
-    // Префикс "ba"
     g0 -> g1 [label="b"];
     g1 -> u0 [label="a"];
 
-    // u0 — "между блоками" в X*, X = b | cac | acac | ccbb | ccaba
     u0  [label="u0"];
     u1  [label="u1"];
     u2  [label="u2"];
     u3  [label="u3"];
     u6  [label="u6"];
-    u7  [label="u7"];   // объединённые бывшие u7 и u9
+    u7  [label="u7"];  
     u8  [label="u8"];
     u10 [label="u10"];
 
-    // После завершения блока "ba X*" — ε назад в g0 (звезда по T = ba X*)
     u0 -> g0 [label="ε"];
 
-    // ---- X* : b | cac | acac | ccbb | ccaba ----
-
-    // 1) "b"
     u0 -> u0 [label="b"];
 
-    // 2) "cac"
     u0 -> u1 [label="c"];
     u1 -> u2 [label="a"];
     u2 -> u0 [label="c"];
 
-    // 3) "acac" = 'a' + "cac"
     u0 -> u3 [label="a"];
-    u3 -> u1 [label="c"];   // дальше общий хвост как в "cac"
+    u3 -> u1 [label="c"];  
 
-    // 4–5) "ccbb" и "ccaba" через общий "cc..."
-    u0 -> u6 [label="c"];        // первая 'c'
-    u6 -> u7 [label="c"];        // вторая 'c'
+    u0 -> u6 [label="c"];   
+    u6 -> u7 [label="c"];     
 
-    // из объединённого состояния после 'cc' читаем либо 'b', либо 'a':
-    // "ccbb"
     u7 -> u8  [label="b"];
     u8 -> u0  [label="b"];
 
-    // "ccaba"
     u7  -> u10 [label="a"];
     u10 -> g1 [label="b"];
 }
