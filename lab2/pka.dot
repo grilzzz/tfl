@@ -8,59 +8,63 @@ digraph NFA {
 
     start -> amp;
 
-    amp -> f0 [label="ε"];  
 
-    f0 [label="f0"];
-    f1 [label="f1"];
-    f2 [label="f2"];
-    f3 [label="f3"];
+    amp -> q0 [label="ε"];
 
-    f0 -> f0 [label="c"];
 
-    f0 -> f1 [label="a"];   
-    f1 -> f1 [label="a"];  
-    f1 -> f2 [label="b"];     
-    f2 -> f2 [label="b"];   
-    f2 -> f3 [label="a"];  
-    f3 -> f0 [label="b"];    
-    
-    f0 -> g0 [label="ε"];
+    node [shape = doublecircle]; q0 q4 q7;
+    node [shape = circle];
 
-    g0 [shape=doublecircle, label="g0"];
-    g1 [label="g1"];
+    q0 -> q1  [label="a"];
+    q0 -> q2  [label="b"];
+    q0 -> q0  [label="c"];
 
-    g0 -> g1 [label="b"];
-    g1 -> u0 [label="a"];
+    q1 -> q1  [label="a"];
+    q1 -> q3  [label="b"];
+    q1 -> q14 [label="c"];
 
-    u0  [label="u0"];
-    u1  [label="u1"];
-    u2  [label="u2"];
-    u3  [label="u3"];
-    u6  [label="u6"];
-    u7  [label="u7"]; 
-    u8  [label="u8"];
-    u10 [label="u10"];
+    q2 -> q4  [label="a"];
+    q2 -> q14 [label="b, c"];
 
-    u0 -> g0 [label="ε"];
+    q3 -> q5  [label="a"];
+    q3 -> q3  [label="b"];
+    q3 -> q14 [label="c"];
 
-    u0 -> u0 [label="b"];
+    q4 -> q6  [label="a"];
+    q4 -> q7  [label="b"];
+    q4 -> q8  [label="c"];
 
-    u0 -> u1 [label="c"];
-    u1 -> u2 [label="a"];
-    u2 -> u0 [label="c"];
+    q5 -> q14 [label="a, c"];
+    q5 -> q0  [label="b"];
 
-    u0 -> u3 [label="a"];
-    u3 -> u1 [label="c"];  
+    q6 -> q14 [label="a, b"];
+    q6 -> q9  [label="c"];
 
-    u0 -> u6 [label="c"];  
-    u6 -> u7 [label="c"]; 
+    q7 -> q4  [label="a"];
+    q7 -> q7  [label="b"];
+    q7 -> q8  [label="c"];
 
-    u7 -> u8  [label="b"];
-    u8 -> u0  [label="b"];
+    q8 -> q10 [label="a"];
+    q8 -> q14 [label="b"];
+    q8 -> q11 [label="c"];
 
-    u7  -> u10 [label="a"];
-    u10 -> g1 [label="b"];
+    q9 -> q10 [label="a"];
+    q9 -> q14 [label="b, c"];
 
+    q10 -> q14 [label="a, b"];
+    q10 -> q4  [label="c"];
+
+    q11 -> q12 [label="a"];
+    q11 -> q13 [label="b"];
+    q11 -> q14 [label="c"];
+
+    q12 -> q14 [label="a, c"];
+    q12 -> q2  [label="b"];
+
+    q13 -> q14 [label="a, c"];
+    q13 -> q4  [label="b"];
+
+    q14 -> q14 [label="a, b, c"];
 
     amp -> h2 [label="ε"];  
 
@@ -68,7 +72,6 @@ digraph NFA {
     h2 [shape=doublecircle, label="h2"];
     h3 [label="h3"];
     h4 [shape=doublecircle, label="h4"];
-
 
     h1 -> h4 [label="a"];   
     h1 -> h1 [label="b"];
