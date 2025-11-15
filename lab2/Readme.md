@@ -53,7 +53,7 @@
 
 ## ПКА
 ПКА с хитрой логикой сделать не получилось. Заметил только что слово не может кончаться на ca и aa. Решил это добавить к ДКА. ПКА лежит в файле pka.dot. Вот картинка:
-<img width="1255" height="1004" alt="image" src="https://github.com/user-attachments/assets/94b162c5-2cd9-43a2-aa61-61f8e774d609" />
+<img width="1067" height="998" alt="image" src="https://github.com/user-attachments/assets/031939fa-065c-4ca7-8034-be52bf69b4e4" />
 
 В таблице смысла не вижу т. к. ДКА и так минимальный, а часть с низу по сути бесполезная
 
