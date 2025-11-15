@@ -1,0 +1,59 @@
+digraph NFA {
+    rankdir=LR;
+    node [shape=circle];
+
+    start [shape=point];
+    start -> f0;
+
+
+    f0 [label="f0"];
+    f1 [label="f1"];
+    f2 [label="f2"];
+    f3 [label="f3"];
+
+    f0 -> f0 [label="c"];
+
+    f0 -> f1 [label="a"];    
+    f1 -> f1 [label="a"];   
+    f1 -> f2 [label="b"];   
+    f2 -> f2 [label="b"];   
+    f2 -> f3 [label="a"];     
+    f3 -> f0 [label="b"];     
+
+    f0 -> g0 [label="ε"];
+
+    g0 [shape=doublecircle, label="g0"];
+    g1 [label="g1"];
+
+    g0 -> g1 [label="b"];
+    g1 -> u0 [label="a"];
+
+    u0  [label="u0"];
+    u1  [label="u1"];
+    u2  [label="u2"];
+    u3  [label="u3"];
+    u6  [label="u6"];
+    u7  [label="u7"];  
+    u8  [label="u8"];
+    u10 [label="u10"];
+
+    u0 -> g0 [label="ε"];
+
+    u0 -> u0 [label="b"];
+
+    u0 -> u1 [label="c"];
+    u1 -> u2 [label="a"];
+    u2 -> u0 [label="c"];
+
+    u0 -> u3 [label="a"];
+    u3 -> u1 [label="c"];  
+
+    u0 -> u6 [label="c"];   
+    u6 -> u7 [label="c"];     
+
+    u7 -> u8  [label="b"];
+    u8 -> u0  [label="b"];
+
+    u7  -> u10 [label="a"];
+    u10 -> g1 [label="b"];
+}
