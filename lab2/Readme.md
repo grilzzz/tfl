@@ -56,7 +56,7 @@
 <img width="1067" height="998" alt="image" src="https://github.com/user-attachments/assets/031939fa-065c-4ca7-8034-be52bf69b4e4" />
 
 Таблица:
-| prefix \ postfix |  c |  a |  b |  ε | ba | bab | babbab |
+| |  c |  a |  b |  ε | ba | bab | babbab |
 | ---------------- | -: | -: | -: | -: | -: | --: | -----: |
 | bab      |  0 |  1 |  1 |  1 |  1 |   1 |      1 |
 | ba       |  0 |  0 |  1 |  1 |  1 |   1 |      1 |
