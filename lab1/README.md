@@ -44,8 +44,8 @@ $$
 Дальше:
 
 $$
-v=\texttt{bcca}\ \to\ \texttt{bcab}\ \Rightarrow\ \texttt{babb},\qquad
-w=\texttt{acbc}\ \Rightarrow\ \texttt{abcc}.
+v=\texttt{bcca}\ \to\ \texttt{bcab}\ \to\ \texttt{babb},\qquad
+w=\texttt{acbc}\ \to\ \texttt{abcc}.
 $$
 
 $\texttt{babb}$ и $\texttt{abcc}$ — НФ и не равны, значит локальная конфлюэнтность не выполняется.
