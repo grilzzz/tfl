@@ -157,8 +157,8 @@ def block_parity_total(w: str) -> int:
         while i < n and proj[i] == 'x':
             xlen += 1
             i += 1
-        if xlen & 1:
-            odd_total ^= 1
+        if xlen % 2 == 1:
+            odd_total = 1 - odd_total
     return odd_total
 
 
