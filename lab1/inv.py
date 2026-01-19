@@ -81,16 +81,16 @@ def _rand_diag(dim=2, low=0.5, high=2.0, rng=None):
     return np.diag(d)
 
 def matrix_invariant(
-    w: str,
-    A: np.ndarray | None = None,
-    X: np.ndarray | None = None,
+    w,
+    A = None,
+    X = None,
     *,
-    dim: int = 2,
-    rng_seed: int | None = None,
+    dim = 2,
+    rng_seed = None,
     low: float = 0.5,
     high: float = 2.0,
-    return_matrices: bool = False,
-) -> np.ndarray | tuple[np.ndarray, np.ndarray, np.ndarray]:
+    return_matrices = False,
+):
     """
     Матричный инвариант, умножая матрицы В ПОРЯДКЕ букв слова:
         M_a = A, M_b = M_c = X.
