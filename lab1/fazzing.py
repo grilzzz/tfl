@@ -20,28 +20,6 @@ def abncc_rule(n):
 N_extra = [abncc_rule(n) for n in [1,2,3]]
 T_prime = T + N_extra
 
-# не используется
-def neighbors(word, rules):
-    outs = set()
-    for lhs, rhs in rules:
-        # forward
-        start = 0
-        while True:
-            i = word.find(lhs, start)
-            if i == -1:
-                break
-            outs.add(word[:i] + rhs + word[i+len(lhs):])
-            start = i + 1
-        # backward
-        start = 0
-        while True:
-            i = word.find(rhs, start)
-            if i == -1:
-                break
-            outs.add(word[:i] + lhs + word[i+len(rhs):])
-            start = i + 1
-    outs.discard(word)
-    return outs
 
 def neighbors_fwd(word: str, rules):
     """Все одношаговые подстановки только вперёд (lhs -> rhs)."""
