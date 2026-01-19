@@ -44,7 +44,7 @@ $$
 Дальше:
 
 $$
-v=\texttt{bcca}\ \Rightarrow\ \texttt{bcab}\ \Rightarrow\ \texttt{babb},\qquad
+v=\texttt{bcca}\ to \texttt{bcab}\ \Rightarrow\ \texttt{babb},\qquad
 w=\texttt{acbc}\ \Rightarrow\ \texttt{abcc}.
 $$
 
